@@ -4,7 +4,17 @@ const morgan = require('morgan');    // import morgan
 const app = express();               // tạo app Express
 const { engine } = require('express-handlebars'); // import express-handlebars
 const PORT = 3000;
+const route = require('./routes');
+const db = require('./config/db');
 
+const mongoose = require('mongoose');
+
+// connect db
+// db.connect();
+
+mongoose.connect('mongodb://localhost:27017/learn_nodeJS_dev')
+  .then(() => console.log('Connected!'))
+  .catch(err => console.log('Connection failed: ' + err.message));
 
 app.use(express.static(path.join(__dirname, 'public'))); // thiết lập thư mục static
 
@@ -14,15 +24,14 @@ app.engine('.hbs', engine({extname: '.hbs'})); // cấu hình engine handlebars
 app.set('view engine', 'hbs'); // đặt view engine là handlebars
 app.set("views", path.join(__dirname, "resources", "views")); // thiết lập thư mục view
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// định nghĩa route xử lý GET /
-app.get('/', (req, res) => {
-  res.render('home'); // render file home.handlebars
-});
 
-app.get('/news', (req, res) => {
-  res.render('news'); // render file home.handlebars
-});
+
+// route init
+route(app);
+
 
 // chọn port chạy server
 

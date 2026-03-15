@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{data.title}}</title>
+</head>
+<body>
+    <div class="container">
+
+    <div class="row">
+{{#each products}}
+        <div class="col d-flex p-2 border m-2 rounded bg-light">
+            <img src="https://giaycaosmartmen.com/wp-content/uploads/2021/01/giay-the-thao-4-mua-smartmen-0.jpg"
+                alt="img" width="70px" height="70px" />
+            <div class="px-4">
+                <p>{{this.name}}</p>
+                <p>{{this.price}}₫</p>
+            </div>
+        </div>
+{{/each}}
+       
+
+    </div>
+
+    
+</div>
+</body>
+</html>
